@@ -1,12 +1,33 @@
-﻿namespace PersonalWallet2.Infrastucture
+﻿using System.Text.Json;
+namespace PersonalWallet2.Infrastucture
 {
     public class FileStorage
     {
         private readonly string path;
 
-        public FileStorage(string path ="personalWallet.json")
+        public FileStorage(string path)
         {
             this.path = path;
+        }
+
+        public WalletStorage Load()
+        {
+            if (!File.Exists(path))
+            {
+                return new WalletStorage();
+            }
+
+            var json = File.ReadAllText(path);
+
+            var storage = JsonSerializer.Deserialize<WalletStorage>(json);
+
+            return storage;
+        }
+
+        public void Save(WalletStorage storage)
+        {
+            var json = JsonSerializer.Serialize(storage);
+            File.WriteAllText(path, json);
         }
 
 
