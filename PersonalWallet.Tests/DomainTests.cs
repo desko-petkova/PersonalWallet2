@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using PersonalWallet.Domain.Entitys;
-using PersonalWallet.Domain.Enums;
-using PersonalWallet.Domain.ValueObjects;
+using PersonalWallet2.Domain.Entities;
+using PersonalWallet2.Domain.Enums;
+using PersonalWallet2.Domain.ValueObjects;
 namespace PersonalWallet.Tests
 {
     [TestFixture]
@@ -39,7 +39,7 @@ namespace PersonalWallet.Tests
             var left = new Money(10);
             var right = new Money(4);
 
-            var result = left.Subtract(right);
+            var result = left.Substract(right);
 
             Assert.That(result.Amount, Is.EqualTo(6));
         }
@@ -50,7 +50,7 @@ namespace PersonalWallet.Tests
             var left = new Money(10);
             var right = new Money(11);
 
-            Assert.Throws<InvalidOperationException>(() => left.Subtract(right));
+            Assert.Throws<InvalidOperationException>(() => left.Substract(right));
         }
 
         // ============================== Account.cs ===================================
