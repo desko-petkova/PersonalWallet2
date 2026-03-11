@@ -21,7 +21,7 @@
             decimal result = Amount - other.Amount;
 
             if (result < 0)
-                throw new InvalidOperationException("Resutl must be positive");
+                throw new InvalidOperationException("Insufficient availbility");
 
             return new Money(result);
         }

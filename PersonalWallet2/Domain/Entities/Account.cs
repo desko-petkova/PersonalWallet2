@@ -23,10 +23,16 @@ namespace PersonalWallet2.Domain.Entities
 
         public void Deposit(Money amount)
         {
+            if (amount.Amount <= 0)
+                throw new Exception("Amount must be greater than zero");
+
             Balance = Balance.Add(amount);
         }
         public void Withdraw(Money amount)
         {
+            if (amount.Amount <= 0)
+                throw new Exception("Amount must be greater than zero");
+
             Balance = Balance.Substract(amount);
         }
 
