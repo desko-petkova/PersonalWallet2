@@ -1,11 +1,9 @@
-﻿using PersonalWallet2.Domain.Entities;
-using PersonalWallet2.Domain.Enums;
-using PersonalWallet2.Domain.ValueObjects;
-using System.Xml.Linq;
+﻿using PersonalWallet2.Application.Interfaces;
+using PersonalWallet2.Domain.Entities;
 
 namespace PersonalWallet2.Infrastucture
 {
-    public class FileAccountRepository
+    public class FileAccountRepository : IAccountRepository
     {
         private readonly FileStorage _storage;
 

@@ -1,10 +1,11 @@
-﻿namespace PersonalWallet2
+﻿using PersonalWallet2.Infrastucture;
+namespace PersonalWallet2
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            var storage = new FileStorage("wallet.json");
         }
     }
 }
