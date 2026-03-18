@@ -1,6 +1,6 @@
 ﻿//using NUnit.Framework;
-//using PersonalWallet2.Domain.Enums;
-//using PersonalWallet2.Infrastucture;
+//using PesonalWallet1.Domain.Enums;
+//using PesonalWallet1.Infrastucture;
 
 //namespace PersonalWallet.Tests
 //{
