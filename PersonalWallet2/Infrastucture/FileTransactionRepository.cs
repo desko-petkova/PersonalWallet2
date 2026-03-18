@@ -1,10 +1,11 @@
-﻿using PersonalWallet2.Domain.Entities;
+﻿using PersonalWallet2.Application.Interfaces;
+using PersonalWallet2.Domain.Entities;
 using PersonalWallet2.Domain.ValueObjects;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PersonalWallet2.Infrastucture
 {
-    public class FileTransactionRepository
+    public class FileTransactionRepository : ITransactionRepository
     {
         private readonly FileStorage _storage;
 
