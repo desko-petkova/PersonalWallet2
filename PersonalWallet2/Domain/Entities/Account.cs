@@ -12,7 +12,7 @@ namespace PersonalWallet2.Domain.Entities
         public Account () { }
         public Account(int id, string name, AccountType type,Money balance)
         {
-            if (id <= 0) throw new ArgumentException("Id must be positive");
+            if (id < 0) throw new ArgumentException("Id must be positive");
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Name is required");
             Id = id;
