@@ -46,6 +46,7 @@ namespace PersonalWallet2.Infrastucture
                    account.Type,
                    account.Balance
                     );
+                db.Accounts.Add(newAccount);
             }
             else
             {
