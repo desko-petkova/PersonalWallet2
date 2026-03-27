@@ -1,7 +1,9 @@
 ﻿using NUnit.Framework;
-using PesonalWallet1.Domain.Entities;
-using PesonalWallet1.Domain.Enums;
-using PesonalWallet1.Domain.ValueObjects;
+using PersonalWallet2.Domain.Entities;
+using PersonalWallet2.Domain.Enums;
+using PersonalWallet2.Domain.ValueObjects;
+
+using MyTransacton = PersonalWallet2.Domain.Entities.Transaction;
 
 namespace PersonalWallet.Tests
 {
@@ -132,7 +134,7 @@ namespace PersonalWallet.Tests
         {
             var date = new DateTime(2026, 1, 1);
 
-            var transaction = new PesonalWallet1.Domain.Entities.Transation(
+            var transaction = new MyTransacton(
                 1,
                 2,
                 TransactionType.Income,
@@ -150,21 +152,21 @@ namespace PersonalWallet.Tests
         public void Constructor_Should_Throw_When_Id_Is_Negative_Transaction()
         {
             Assert.Throws<ArgumentException>(() =>
-                new PesonalWallet1.Domain.Entities.Transation(-1, 1, TransactionType.Income, new Money(10), DateTime.Now));
+                new MyTransacton(-1, 1, TransactionType.Income, new Money(10), DateTime.Now));
         }
 
         [Test]
         public void Constructor_Should_Throw_When_AccountId_Is_Not_Positive()
         {
             Assert.Throws<ArgumentException>(() =>
-                new PesonalWallet1.Domain.Entities.Transation(1, 0, TransactionType.Income, new Money(10), DateTime.Now));
+                new MyTransacton(1, 0, TransactionType.Income, new Money(10), DateTime.Now));
         }
 
         [Test]
         public void Constructor_Should_Throw_When_Amount_Is_Zero()
         {
             Assert.Throws<ArgumentException>(() =>
-                new PesonalWallet1.Domain.Entities.Transation(1, 1, TransactionType.Income, new Money(0), DateTime.Now));
+                new MyTransacton(1, 1, TransactionType.Income, new Money(0), DateTime.Now));
         }
     }
 }
