@@ -1,4 +1,5 @@
 ﻿using PersonalWallet2.Application;
+using PersonalWallet2.Domain.Entities;
 using PersonalWallet2.Domain.Enums;
 using System.Collections.Concurrent;
 
@@ -61,7 +62,16 @@ namespace PersonalWallet2.ConsoleUI
 
         private void ShowAccount()
         {
-            throw new NotImplementedException();
+            var account = service.GetAllAccounts();
+            if(account.Count == 0)
+            {
+                Console.WriteLine("Accounts not found");
+            }
+            foreach(var acc  in account)
+            {
+Console.WriteLine($"{acc.Id} | {acc.Name} | {acc.Type} | {acc.Balance.Amount}");
+            }
+            Console.ReadLine();
         }
 
         private void AddTransaction(TransactionType income)
@@ -74,23 +84,44 @@ namespace PersonalWallet2.ConsoleUI
             Console.Write("Enter account name:");
             string name = Console.ReadLine();
 
+            Console.WriteLine("Account type:");
+            Console.WriteLine("Cash, 0:");
+            Console.WriteLine("Bank, 1:");
+            Console.WriteLine("DebitCart, 2:");
+            Console.WriteLine("VitualCart, 3:");
+            Console.WriteLine("SavingBank, 4:");
+            Console.Write("Choose type:");
+            string input = Console.ReadLine();
+            int type;
+            while(!int.TryParse(input, out type))
+            {
+                Console.WriteLine("Invalid input");
+                Console.Write("Try again:");
+                input = Console.ReadLine();
+            }
+            var typeAccount = (AccountType)type;
 
-
-            Console.Write("Amount: ");
+            Console.Write("Initial amount: ");
             string amountInput = Console.ReadLine();
 
-            if (!decimal.TryParse(amountInput, out decimal amount))
+            decimal amount;
+            while (!decimal.TryParse(amountInput, out amount))
             {
                 Console.WriteLine("Invalid input!");
-                return;
+                Console.Write("Try again:");
+                amountInput = Console.ReadLine();
+            }
+            try
+            {
+                service.CreateAccount(name, typeAccount, amount);
+                Console.WriteLine("New account is created!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
 
-
-        //Cash,
-        //Bank,
-        //DebitCart,
-        //VitualCart,
-        //SavingBank
+            Console.ReadLine();
         }
     }
 }

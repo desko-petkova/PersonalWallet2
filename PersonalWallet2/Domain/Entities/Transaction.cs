@@ -11,7 +11,7 @@ namespace PersonalWallet2.Domain.Entities
         public Money Amount { get; private set; }
         public DateTime Date { get;}
 
-        public Transaction() { } //JSON
+       // public Transaction() { } //JSON
 
         public Transaction(int id, int accountId, 
             TransactionType type, Money amount, DateTime date)
