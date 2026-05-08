@@ -32,5 +32,35 @@ namespace PersonalWallet2.Application
             return accountRepo.GetAll();
         }
 
+        public void CreateTransaction(int accountId, TransactionType type, decimal amount)
+        {
+            var account = accountRepo.GetById(accountId);
+
+            var money = new Money(amount);
+
+            if (type == TransactionType.Income)
+            {
+                account.Deposit(money);
+            }
+            else
+            {
+                account.Withdraw(money);
+            }
+
+            accountRepo.Save(account);
+
+            var transaction = new Transaction(
+                0,
+                accountId,
+                type,
+                money,
+                DateTime.Now);
+
+            transactionRepo.Save(transaction);
+        }
+        public IReadOnlyList<Transaction> GetTransactions(int accountId)
+        {
+            return transactionRepo.GetByAccountId(accountId);
+        }
     }
 }

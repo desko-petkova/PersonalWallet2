@@ -57,7 +57,23 @@ namespace PersonalWallet2.ConsoleUI
 
         private void ShowTransaction()
         {
-            throw new NotImplementedException();
+            Console.Write("Account Id: ");
+            string accountInput = Console.ReadLine();
+            if (!int.TryParse(accountInput, out int accountId))
+            {
+                Console.WriteLine("Invalid account id.");
+                Pause();
+                return;
+            }
+
+            var transactions = service.GetTransactions(accountId);
+
+            foreach (var t in transactions)
+            {
+                Console.WriteLine($"{t.Id} {t.Type} {t.Amount.Amount} {t.Date}");
+            }
+
+            Pause();
         }
 
         private void ShowAccount()
@@ -74,9 +90,46 @@ Console.WriteLine($"{acc.Id} | {acc.Name} | {acc.Type} | {acc.Balance.Amount}");
             Console.ReadLine();
         }
 
-        private void AddTransaction(TransactionType income)
+        private void AddTransaction(TransactionType type)
         {
-            throw new NotImplementedException();
+            Console.Write("Account Id: ");
+            string accountInput = Console.ReadLine();
+
+            Console.Write("Amount: ");
+            string amountInput = Console.ReadLine();
+
+            if (!int.TryParse(accountInput, out int accountId))
+            {
+                Console.WriteLine("Invalid account id.");
+                Pause();
+                return;
+            }
+
+            if (!decimal.TryParse(amountInput, out decimal amount))
+            {
+                Console.WriteLine("Invalid amount.");
+                Pause();
+                return;
+            }
+
+            try
+            {
+
+                service.CreateTransaction(accountId,type, amount);
+                Console.WriteLine("Transaction added successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            Pause();
+        }
+        private static void Pause()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
 
         private void CreateAcount()
